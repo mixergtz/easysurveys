@@ -38,3 +38,21 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'bootstrap-sass', '~> 3.3.1'
+gem 'autoprefixer-rails'
+
+group :development, :test do
+ gem "rspec-rails", "~> 2.14.0"
+ gem "factory_girl_rails", "~> 4.2.1"
+ gem "pry"
+ gem 'guard-livereload', require: false
+end
+
+group :test do
+ gem "faker", "~> 1.1.2"
+ gem "capybara", "~> 2.1.0"
+ gem "database_cleaner", "~> 1.0.1"
+ gem "launchy", "~> 2.3.0"
+ gem "selenium-webdriver", "~> 2.39.0"
+end
+
