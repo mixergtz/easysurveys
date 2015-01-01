@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :survey_responses
+
   resources :surveys
 
   post "surveys/send_response" => "surveys#send_response"
