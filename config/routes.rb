@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  resources :survey_responses
 
-  resources :surveys
+
+
+  resources :surveys do
+    resources :survey_responses, only: [:index, :create], path: :responses, as: :responses
+  end
 
   post "surveys/send_response" => "surveys#send_response"
 

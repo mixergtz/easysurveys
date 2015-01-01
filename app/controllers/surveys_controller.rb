@@ -6,6 +6,7 @@ class SurveysController < ApplicationController
   end
 
   def show
+    @survey_response = SurveyResponse.new
   end
 
   def new
