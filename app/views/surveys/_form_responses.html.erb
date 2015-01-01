@@ -1,0 +1,16 @@
+<%= form_tag(controller: "surveys", action: "send_response", method: "post") do %>
+
+  <% @survey.questions.each do |question|  %>
+
+    <h2><%= question.description %></h2>
+
+
+    <%#= collection_radio_buttons(:"question_#{question.id}", :answer, question.answers, :id, :description) %>
+
+    <%= collection_radio_buttons(:"survey_answers", :"questions_answers[#{question.id}]", question.answers, :id, :description) %>
+
+  <% end %>
+
+  <%= submit_tag "Enviar encuesta" %>
+
+<% end %>

@@ -10,10 +10,7 @@
   <%= @survey.description %>
 </p>
 
-<p>
-  <strong>State:</strong>
-  <%= @survey.state %>
-</p>
+<%= render 'form_responses' %>
 
 <%= link_to 'Edit', edit_survey_path(@survey) %> |
 <%= link_to 'Back', surveys_path %>

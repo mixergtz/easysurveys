@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :surveys
 
+  post "surveys/send_response" => "surveys#send_response"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

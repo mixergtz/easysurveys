@@ -10,6 +10,10 @@ class SurveysController < ApplicationController
 
   def new
     @survey = Survey.new
+    2.times do
+      question = @survey.questions.build
+      3.times { question.answers.build }
+    end
   end
 
   def edit
@@ -40,6 +44,11 @@ class SurveysController < ApplicationController
     redirect_to surveys_url, notice: 'Survey was successfully destroyed.'
   end
 
+  def send_response
+    answers = params[:survey_answers][:questions_answers]
+    answers.each_value {|value| puts value }
+  end
+
   private
 
     def set_survey
@@ -48,6 +57,6 @@ class SurveysController < ApplicationController
 
 
     def survey_params
-      params.require(:survey).permit(:title, :description, :state)
+      params.require(:survey).permit(:title, :description, :state, questions_attributes: [:id, :description, :_destroy, answers_attributes: [:id, :description, :_destroy]])
     end
 end
