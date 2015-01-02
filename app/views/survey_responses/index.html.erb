@@ -3,6 +3,6 @@
 <% @survey_responses.each do |survey_response| %>
 
   <h2><%= survey_response.question.description %></h2>
-      <%= SurveyResponse.question_summary(survey_response.question_id) %>
+  <%= pie_chart SurveyResponse.question_summary(survey_response.question_id) %>
 
 <% end %>

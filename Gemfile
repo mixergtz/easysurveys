@@ -41,6 +41,8 @@ gem 'spring',        group: :development
 gem 'bootstrap-sass', '~> 3.3.1'
 gem 'autoprefixer-rails'
 
+gem "chartkick"
+
 group :development, :test do
  gem "rspec-rails", "~> 2.14.0"
  gem "factory_girl_rails", "~> 4.2.1"
