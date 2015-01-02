@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
 
-
+  devise_for :users
+  root 'surveys#index'
 
   resources :surveys do
     resources :survey_responses, only: [:index, :create], path: :responses, as: :responses
   end
-
-  post "surveys/send_response" => "surveys#send_response"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
