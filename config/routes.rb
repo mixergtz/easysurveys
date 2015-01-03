@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
-  devise_for :users
   root 'surveys#index'
+
+  devise_for :users, :controllers => { registrations: 'registrations' }
+
 
   resources :surveys do
     resources :survey_responses, only: [:index, :create], path: :responses, as: :responses
