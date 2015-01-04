@@ -8,7 +8,7 @@ class SurveyResponsesController < ApplicationController
     survey = params[:survey_id]
     answers = params[:survey_responses][:questions_answers]
     answers.each do |question, answer|
-      SurveyResponse.save_response(question, answer)
+      SurveyResponse.save_response(question, answer, current_user.id)
     end
     redirect_to survey_responses_path(survey)
   end

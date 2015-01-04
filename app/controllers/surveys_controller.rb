@@ -21,7 +21,7 @@ class SurveysController < ApplicationController
   end
 
   def create
-    @survey = Survey.new(survey_params)
+    @survey = current_user.surveys.new(survey_params)
 
     if @survey.save
       redirect_to @survey, notice: 'Survey was successfully created.'
