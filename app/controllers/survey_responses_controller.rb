@@ -1,4 +1,5 @@
 class SurveyResponsesController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @survey_responses = SurveyResponse.get_questions(params[:survey_id])
