@@ -1,6 +1,8 @@
 class SurveysController < ApplicationController
   before_action :authenticate_user!
   before_action :set_survey, only: [:show, :edit, :update, :destroy]
+  before_action :check_ownership, only: [:edit, :update, :destroy]
+  before_action :check_state, only: :show
 
   def index
     @surveys = Survey.all
@@ -46,11 +48,6 @@ class SurveysController < ApplicationController
     redirect_to surveys_url, notice: 'Survey was successfully destroyed.'
   end
 
-  def send_response
-    answers = params[:survey_answers][:questions_answers]
-    answers.each_value {|value| puts value }
-  end
-
   private
 
     def set_survey
@@ -60,5 +57,13 @@ class SurveysController < ApplicationController
 
     def survey_params
       params.require(:survey).permit(:title, :description, :state, questions_attributes: [:id, :description, :_destroy, answers_attributes: [:id, :description, :_destroy]])
+    end
+
+    def check_ownership
+      redirect_to surveys_url, notice: "You're not allowed to modify this survey" unless current_user.author?(@survey)
+    end
+
+    def check_state
+      redirect_to surveys_url, notice: "You're not allowed to see this survey" unless current_user.author?(@survey) || @survey.published?
     end
 end

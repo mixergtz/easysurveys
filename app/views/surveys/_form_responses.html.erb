@@ -8,8 +8,8 @@
 
   <% end %>
 
-  <%#= f.hidden_field :survey_responses, :survey, value: @survey.id %>
-
-  <%= f.submit "Enviar encuesta" %>
+  <% unless current_user.author?(@survey) %>
+    <%= f.submit "Enviar encuesta" %>
+  <% end %>
 
 <% end %>

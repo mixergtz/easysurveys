@@ -8,4 +8,8 @@ class User < ActiveRecord::Base
   has_many :survey_responses, dependent: :destroy
 
   enum genre: [:male, :female]
+
+  def author?(survey)
+    self.id == survey.user_id
+  end
 end

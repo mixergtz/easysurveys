@@ -13,12 +13,16 @@
   <tbody>
     <% @surveys.each do |survey| %>
       <tr>
+      <% if survey.published? || current_user.author?(survey) %>
         <td><%= survey.title %></td>
         <td><%= survey.description %></td>
         <td><%= survey.state %></td>
         <td><%= link_to 'Show', survey %></td>
-        <td><%= link_to 'Edit', edit_survey_path(survey) %></td>
-        <td><%= link_to 'Destroy', survey, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.author?(survey) %>
+          <td><%= link_to 'Edit', edit_survey_path(survey) %></td>
+          <td><%= link_to 'Destroy', survey, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      <% end %>
       </tr>
     <% end %>
   </tbody>

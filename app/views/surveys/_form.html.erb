@@ -4,6 +4,12 @@
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </p>
+
+  <div class="field">
+    <%= f.label :state %><br />
+    <%= f.select :state, Survey.states.keys.to_a %>
+  </div>
+
   <p>
     <%= f.label :description %><br />
     <%= f.text_area :description %>
