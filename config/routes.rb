@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'surveys#index'
+  root 'static#index'
 
   devise_for :users, :controllers => { registrations: 'registrations' }
 

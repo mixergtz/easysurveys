@@ -10,4 +10,8 @@ class RegistrationsController < Devise::RegistrationsController
     params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :current_password)
   end
 
+  def after_sign_up_path_for(resource)
+    '/surveys'
+  end
+
 end
