@@ -1,6 +1,7 @@
 class SurveyResponsesController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_ownership, only: :create
+  before_action :check_ownership, only: :index
+  before_action :protect_from_owner, only: :create
 
   def index
     @survey_responses = SurveyResponse.get_questions(params[:survey_id])
@@ -22,8 +23,13 @@ class SurveyResponsesController < ApplicationController
       params.require(:survey_responses).permit(:questions_answers)
     end
 
-    def check_ownership
+    def protect_from_owner
       @survey = Survey.find(params[:survey_id])
       redirect_to surveys_url, notice: "You're not allowed to send responses to this survey" if current_user.author?(@survey)
+    end
+
+    def check_ownership
+      @survey = Survey.find(params[:survey_id])
+      redirect_to surveys_url, notice: "You're not allowed to see the responses of this survey" unless current_user.author?(@survey)
     end
 end
