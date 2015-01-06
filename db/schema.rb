@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150105150952) do
+ActiveRecord::Schema.define(version: 20150106170009) do
 
   create_table "answers", force: true do |t|
     t.string   "description"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20150105150952) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "timestamp"
   end
 
   add_index "survey_responses", ["answer_id"], name: "index_survey_responses_on_answer_id"

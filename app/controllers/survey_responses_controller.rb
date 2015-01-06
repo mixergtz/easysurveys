@@ -1,36 +1,38 @@
 class SurveyResponsesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_survey
   before_action :check_ownership, only: :index
   before_action :protect_from_owner, only: :create
 
   def index
-    @survey_responses = SurveyResponse.get_questions(params[:survey_id])
-    @survey_responders = SurveyResponse.get_responders(params[:survey_id])
+    @survey_responses = SurveyResponse.get_questions(@survey)
+    @survey_responders = SurveyResponse.get_responders(@survey)
+    @responses_number = SurveyResponse.responses_number(@survey)
   end
 
   def create
-    survey = params[:survey_id]
     answers = params[:survey_responses][:questions_answers]
     answers.each do |question, answer|
-      SurveyResponse.save_response(question, answer, current_user.id)
+      SurveyResponse.create(survey_id: params[:survey_id], question_id: question, answer_id: answer, user_id: current_user.id, timestamp: Time.now.to_i)
     end
-    #redirect_to survey_responses_path(survey) #hacer un redirect a una pagina de gracias
     render :thanks
   end
 
   private
+
+    def set_survey
+      @survey = Survey.find(params[:survey_id])
+    end
 
     def survey_response_params
       params.require(:survey_responses).permit(:questions_answers)
     end
 
     def protect_from_owner
-      @survey = Survey.find(params[:survey_id])
       redirect_to surveys_url, notice: "You're not allowed to send responses to this survey" if current_user.author?(@survey)
     end
 
     def check_ownership
-      @survey = Survey.find(params[:survey_id])
       redirect_to surveys_url, notice: "You're not allowed to see the responses of this survey" unless current_user.author?(@survey)
     end
 end

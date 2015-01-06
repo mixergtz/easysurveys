@@ -1,15 +1,18 @@
-<div class="row">
-  <div class="col-md-8 col-md-offset-2 text-center">
-    <h3>Summary for this survey</h3>
+<div class="container">
+  <div class="col-md-10 col-md-offset-1 text-center">
+    <h3>Summary for <i><%= @survey.title %></i></h3>
+    <h4># of responses: <%= @responses_number %></h4>
     <div class="row">
       <% @survey_responses.each do |survey_response| %>
-
-        <h4><%= survey_response.question.description %></h4>
-        <%= pie_chart SurveyResponse.question_summary(survey_response.question_id) %>
+        <div class="col-md-6">
+          <h4><%= survey_response.question.description %></h4>
+          <%= pie_chart SurveyResponse.question_summary(survey_response.question_id) %>
+        </div>
       <% end %>
     </div>
     <div class="row">
       <h3>People who has answered: </h3>
+        <%= pie_chart SurveyResponse.genres_summary(@survey) %>
         <table class="table table-bordered text-center">
           <tr>
             <th>First Name</th>
