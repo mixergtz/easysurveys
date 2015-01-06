@@ -56,7 +56,7 @@ class SurveysController < ApplicationController
 
 
     def survey_params
-      params.require(:survey).permit(:title, :description, :state, questions_attributes: [:id, :description, :_destroy, answers_attributes: [:id, :description, :_destroy]])
+      params.require(:survey).permit(:title, :logo, :description, :state, questions_attributes: [:id, :description, :_destroy, answers_attributes: [:id, :description, :_destroy]])
     end
 
     def check_ownership

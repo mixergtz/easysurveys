@@ -1,8 +1,14 @@
-<%= form_for @survey do |f| %>
+<%= form_for(@survey, html: {multipart: true}) do |f| %>
   <div class="form-group">
     <%= f.label :title %><br />
     <%= f.text_field :title, class: "form-control" %>
   </div>
+
+  <div class="form-group">
+    <%= f.label :logo %><br />
+    <%= f.file_field :logo, accept: 'image/jpeg,image/gif,image/png', class: "form-control" %>
+  </div>
+
 
   <div class="form-group">
     <%= f.label :state %><br />

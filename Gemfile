@@ -20,6 +20,10 @@ gem 'autoprefixer-rails'
 gem "chartkick"
 gem 'devise'
 
+gem 'carrierwave',             '0.10.0'
+gem 'mini_magick',             '3.8.0'
+gem 'fog',                     '1.23.0'
+
 group :development, :test do
  gem "rspec-rails", "~> 2.14.0"
  gem "factory_girl_rails", "~> 4.2.1"
