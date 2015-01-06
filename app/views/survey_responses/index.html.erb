@@ -12,19 +12,31 @@
     </div>
     <div class="row">
       <h3>People who has answered: </h3>
-        <%= pie_chart SurveyResponse.genres_summary(@survey) %>
-        <table class="table table-bordered text-center">
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-          </tr>
-          <% @survey_responders.each do |survey_responder| %>
+        <div>
+          <h4>Genre</h4>
+          <%= pie_chart SurveyResponse.genres_summary(@survey) %>
+        </div>
+
+        <div>
+          <h4>Age range</h4>
+          <%= column_chart SurveyResponse.age_range_summary(@survey) %>
+        </div>
+
+        <div>
+          <h4>Users who has answered: </h4>
+          <table class="table table-bordered text-center">
             <tr>
-              <td><%= survey_responder.user.first_name %></td>
-              <td><%= survey_responder.user.last_name %></td>
+              <th>First Name</th>
+              <th>Last Name</th>
             </tr>
-          <% end %>
-        </table>
+            <% @survey_responders.each do |survey_responder| %>
+              <tr>
+                <td><%= survey_responder.user.first_name %></td>
+                <td><%= survey_responder.user.last_name %></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
 
     </div>
   </div>

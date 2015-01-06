@@ -15,7 +15,11 @@ class SurveyResponse < ActiveRecord::Base
   end
 
   def self.age_range_summary(survey_id)
-    where("survey_id = ?", 6).select(:timestamp).distinct.joins(:user).group("users.genre").count
+    range_18_25  = where("survey_id = ?", survey_id).select(:timestamp).distinct.joins(:user).where("age(users.birth_date) BETWEEN '18 year'::interval AND '25 year'::interval ").count
+    range_26_35  = where("survey_id = ?", survey_id).select(:timestamp).distinct.joins(:user).where("age(users.birth_date) BETWEEN '26 year'::interval AND '35 year'::interval ").count
+    range_36_45  = where("survey_id = ?", survey_id).select(:timestamp).distinct.joins(:user).where("age(users.birth_date) BETWEEN '36 year'::interval AND '45 year'::interval ").count
+    range_45  = where("survey_id = ?", survey_id).select(:timestamp).distinct.joins(:user).where("age(users.birth_date) > '45 year'::interval ").count
+    { "18 to 25" => range_18_25, "26 to 35" => range_26_35, "36 to 45" => range_36_45, "45+" => range_45 }
   end
 
 end
