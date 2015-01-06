@@ -1,6 +1,6 @@
 $(document).on 'click', 'form .remove_fields', (event) ->
-  $(this).prev('input[type=hidden]').val(true)
-  $(this).closest('fieldset').hide()
+  $(this).next('input[type=hidden]').val(true)
+  $(this).parent('fieldset').hide()
   event.preventDefault()
 
 $(document).on 'click', 'form .add_fields', (event) ->

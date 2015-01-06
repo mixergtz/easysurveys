@@ -1,16 +1,21 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
 
-<p>
-  <strong>Title:</strong>
-  <%= @survey.title %>
-</p>
+    <div class="panel panel-default">
+      <div class="panel-heading text-center">
+        <h3><%= @survey.title %></h3>
+      </div>
+      <div class="panel-heading">
+        <%= @survey.description %>
+      </div>
+      <div class="panel-body">
+        <%= render 'form_responses' %>
+      </div>
+      <div class="panel-footer text-center">
+        <%= link_to 'Back', surveys_path, class: "btn btn-default" %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @survey.description %>
-</p>
 
-<%= render 'form_responses' %>
-
-<%= link_to 'Edit', edit_survey_path(@survey) %> |
-<%= link_to 'Back', surveys_path %>

@@ -1,8 +1,10 @@
-<h1>Listing survey_responses</h1>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2 text-center">
+    <h3>Summary for this survey</h3>
+      <% @survey_responses.each do |survey_response| %>
 
-<% @survey_responses.each do |survey_response| %>
-
-  <h2><%= survey_response.question.description %></h2>
-  <%= pie_chart SurveyResponse.question_summary(survey_response.question_id) %>
-
-<% end %>
+        <h4><%= survey_response.question.description %></h4>
+        <%= pie_chart SurveyResponse.question_summary(survey_response.question_id) %>
+      <% end %>
+  </div>
+</div>

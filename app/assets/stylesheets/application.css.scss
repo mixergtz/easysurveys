@@ -1,0 +1,18 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.survey-preview .panel-body{
+  height: 150px;
+}
+
+.published{
+  color: green;
+}
+
+.draft{
+  color: red;
+}
+
+.navbar{
+  margin-bottom: 5px;
+}

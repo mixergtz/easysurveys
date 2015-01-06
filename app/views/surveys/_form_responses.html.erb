@@ -2,14 +2,20 @@
 
   <% @survey.questions.each do |question|  %>
 
-    <h2><%= question.description %></h2>
+    <h4><%= question.description %></h5>
 
-    <%= collection_radio_buttons(:"survey_responses", :"questions_answers[#{question.id}]", question.answers, :id, :description) %>
+    <%= collection_radio_buttons(:"survey_responses", :"questions_answers[#{question.id}]", question.answers, :id, :description) do |b| %>
+      <div class="radio">
+        <%= b.label { b.radio_button + b.text } %>
+      </div>
+    <% end %>
 
   <% end %>
 
-  <% unless current_user.author?(@survey) %>
-    <%= f.submit "Enviar encuesta" %>
-  <% end %>
+  <div class="text-center">
+    <% unless current_user.author?(@survey) %>
+      <%= f.submit "Enviar encuesta", class: "btn btn-primary" %>
+    <% end %>
+  </div>
 
 <% end %>

@@ -12,7 +12,8 @@ class SurveyResponsesController < ApplicationController
     answers.each do |question, answer|
       SurveyResponse.save_response(question, answer, current_user.id)
     end
-    redirect_to survey_responses_path(survey) #hacer un redirect a una pagina de gracias
+    #redirect_to survey_responses_path(survey) #hacer un redirect a una pagina de gracias
+    render :thanks
   end
 
   private

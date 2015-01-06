@@ -1,33 +1,29 @@
-<h1>Listing surveys</h1>
+<div class="container">
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>State</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <h1>Current surveys</h1>
 
-  <tbody>
-    <% @surveys.each do |survey| %>
-      <tr>
-      <% if survey.published? || current_user.author?(survey) %>
-        <td><%= survey.title %></td>
-        <td><%= survey.description %></td>
-        <td><%= survey.state %></td>
-        <td><%= link_to 'Show', survey %></td>
-        <% if current_user.author?(survey) %>
-          <td><%= link_to 'Edit', edit_survey_path(survey) %></td>
-          <td><%= link_to 'Destroy', survey, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      <% end %>
-      </tr>
+  <% @surveys.each do |survey| %>
+    <% if survey.published? || current_user.author?(survey) %>
+      <div class="col-md-3 survey-preview">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"><%= survey.title %> | <i class="<%= survey.state %>"><%= survey.state %></i></h3>
+            </div>
+          <div class="panel-body">
+            <%= sanitize(truncate(survey.description, length: 150)) %>
+          </div>
+          <div class="panel-footer text-center">
+            <%= link_to raw('<i class="fa fa-eye"> See Survey</i>'), survey %>
+            <% if current_user.author?(survey) %>
+              <%= link_to raw('|  <i class="fa fa-pencil-square-o"> Edit</i>'), edit_survey_path(survey)   %>
+              <%= link_to raw('|  <i class="fa fa-trash"> Destroy</i>'), survey, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <hr>
+              <%= link_to raw('<i class="fa fa-bar-chart"> See Responses</i>'), survey_responses_path(survey) %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  <% end %>
 
-<br>
-
-<%= link_to 'New Survey', new_survey_path %>
+</div>
