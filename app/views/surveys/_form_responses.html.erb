@@ -6,7 +6,7 @@
 
     <%= collection_radio_buttons(:"survey_responses", :"questions_answers[#{question.id}]", question.answers, :id, :description) do |b| %>
       <div class="radio">
-        <%= b.label { b.radio_button + b.text } %>
+        <%= b.label { b.radio_button(checked: true) + b.text } %>
       </div>
     <% end %>
 
