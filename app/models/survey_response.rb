@@ -4,12 +4,9 @@ class SurveyResponse < ActiveRecord::Base
   belongs_to :answer
   belongs_to :user
 
-  validates_presence_of :question_id
-  validates_presence_of :answer_id
-  validates_presence_of :user_id
-
-  scope :get_questions, ->(survey_id) { where("survey_id = ?", survey_id).select(:question_id).distinct } #se podria convertir a objetos question desde aca?
+  scope :get_questions, ->(survey_id) { where("survey_id = ?", survey_id).select(:question_id).distinct }
   scope :question_summary, ->(id) { where("survey_responses.question_id = ?", id).joins(:answer).group("answers.description").count }
+  scope :get_responders, ->(survey_id) { where("survey_id = ?", survey_id).select(:user_id).distinct }
 
   def self.save_response(question_id, answer_id, user_id)
     question = Question.find(question_id) #Se podria hacer con el params :survey_id?

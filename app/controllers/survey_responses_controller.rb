@@ -5,6 +5,7 @@ class SurveyResponsesController < ApplicationController
 
   def index
     @survey_responses = SurveyResponse.get_questions(params[:survey_id])
+    @survey_responders = SurveyResponse.get_responders(params[:survey_id])
   end
 
   def create
