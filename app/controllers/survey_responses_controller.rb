@@ -15,6 +15,7 @@ class SurveyResponsesController < ApplicationController
     answers.each do |question, answer|
       SurveyResponse.create(survey_id: params[:survey_id], question_id: question, answer_id: answer, user_id: current_user.id, timestamp: Time.now.to_i)
     end
+    NotificationsMailer.new_survey_response_email(@survey).deliver
     render :thanks
   end
 

@@ -1,0 +1,7 @@
+Hello, <%= "#{@survey.user.first_name} #{@survey.user.last_name}" %>
+=====================================================================
+You have a new response for the survey: <%= @survey.title %>
+
+This response now has <%= SurveyResponse.responses_number(@survey) %> responses
+
+Thanks for choose to work with us and have a great day!
