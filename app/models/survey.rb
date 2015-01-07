@@ -10,7 +10,8 @@ class Survey < ActiveRecord::Base
   enum state: [:draft, :published]
   validate :logo_size
 
-
+  validates_presence_of :title
+  validates_presence_of :user_id
 
   private
 
