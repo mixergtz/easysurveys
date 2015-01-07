@@ -107,6 +107,8 @@ GEM
       fog-core
       fog-json
     formatador (0.2.5)
+    friendly_id (5.1.0.beta.1)
+      activerecord (>= 4.0.0)
     guard (2.6.1)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -255,6 +257,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.2.1)
   faker (~> 1.1.2)
   fog (= 1.23.0)
+  friendly_id (= 5.1.0.beta.1)
   guard-livereload
   jbuilder (~> 2.0)
   jquery-rails

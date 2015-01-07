@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150106200334) do
+ActiveRecord::Schema.define(version: 20150106234848) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "answers", force: true do |t|
     t.string   "description"
@@ -20,7 +23,20 @@ ActiveRecord::Schema.define(version: 20150106200334) do
     t.datetime "updated_at"
   end
 
-  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
+
+  create_table "friendly_id_slugs", force: true do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "questions", force: true do |t|
     t.text     "description"
@@ -29,7 +45,7 @@ ActiveRecord::Schema.define(version: 20150106200334) do
     t.datetime "updated_at"
   end
 
-  add_index "questions", ["survey_id"], name: "index_questions_on_survey_id"
+  add_index "questions", ["survey_id"], name: "index_questions_on_survey_id", using: :btree
 
   create_table "survey_responses", force: true do |t|
     t.integer  "survey_id"
@@ -41,10 +57,10 @@ ActiveRecord::Schema.define(version: 20150106200334) do
     t.integer  "timestamp"
   end
 
-  add_index "survey_responses", ["answer_id"], name: "index_survey_responses_on_answer_id"
-  add_index "survey_responses", ["question_id"], name: "index_survey_responses_on_question_id"
-  add_index "survey_responses", ["survey_id"], name: "index_survey_responses_on_survey_id"
-  add_index "survey_responses", ["user_id"], name: "index_survey_responses_on_user_id"
+  add_index "survey_responses", ["answer_id"], name: "index_survey_responses_on_answer_id", using: :btree
+  add_index "survey_responses", ["question_id"], name: "index_survey_responses_on_question_id", using: :btree
+  add_index "survey_responses", ["survey_id"], name: "index_survey_responses_on_survey_id", using: :btree
+  add_index "survey_responses", ["user_id"], name: "index_survey_responses_on_user_id", using: :btree
 
   create_table "surveys", force: true do |t|
     t.string   "title"
@@ -54,9 +70,10 @@ ActiveRecord::Schema.define(version: 20150106200334) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.string   "logo"
+    t.string   "slug"
   end
 
-  add_index "surveys", ["user_id"], name: "index_surveys_on_user_id"
+  add_index "surveys", ["user_id"], name: "index_surveys_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -77,7 +94,7 @@ ActiveRecord::Schema.define(version: 20150106200334) do
     t.date     "birth_date"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

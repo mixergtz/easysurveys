@@ -1,4 +1,7 @@
 class Survey < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :title, use: [:slugged]
+
   belongs_to :user
   has_many :questions, dependent: :destroy
   has_many :survey_responses, dependent: :destroy
@@ -6,6 +9,8 @@ class Survey < ActiveRecord::Base
   mount_uploader :logo, SurveyLogoUploader
   enum state: [:draft, :published]
   validate :logo_size
+
+
 
   private
 
