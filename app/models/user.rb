@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
 
   has_many :surveys, dependent: :destroy
   has_many :survey_responses, dependent: :destroy
+  validates_presence_of :first_name
+  validates_presence_of :last_name
+  validates_presence_of :birth_date
 
   enum genre: [:male, :female]
 

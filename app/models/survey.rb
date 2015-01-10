@@ -20,4 +20,5 @@ class Survey < ActiveRecord::Base
       errors.add(:logo, "should be less than 1MB")
     end
   end
+
 end

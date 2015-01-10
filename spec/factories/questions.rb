@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :question do
-    question "MyText"
-    survey nil
+    description { Faker::Lorem.sentence }
+    association :survey
   end
 end

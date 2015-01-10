@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :survey do
-    title "New Survey"
-    description "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer maximus sem eget pellentesque dapibus. Cras ex orci, pharetra ac pellentesque at, vestibulum sit amet ante."
+    title { Faker::Lorem.sentence }
+    description { Faker::Lorem.paragraph }
     state 0
     association :user
 
@@ -12,5 +12,4 @@ FactoryGirl.define do
     end
 
   end
-
 end

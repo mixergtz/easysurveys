@@ -1,4 +1,14 @@
 <%= form_for(@survey, html: {multipart: true}) do |f| %>
+  <% if @survey.errors.full_messages.any? %>
+    <div class="errors">
+      <h3>There's some errors on the form:</h3>
+      <ul>
+      <% @survey.errors.full_messages.each do |error_message| %>
+        <li><%= error_message if @survey.errors.full_messages.first == error_message %> <br /></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="form-group">
     <%= f.label :title %><br />
     <%= f.text_field :title, class: "form-control" %>
