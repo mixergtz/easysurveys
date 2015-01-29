@@ -29,6 +29,8 @@ gem 'friendly_id', '5.1.0.beta.1'
 gem "letter_opener", :group => :development
 
 
+gem "rails_12factor", :group => :production
+
 
 group :development, :test do
  gem "rspec-rails", "~> 2.14.0"
